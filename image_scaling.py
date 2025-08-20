@@ -11,7 +11,7 @@ def lagrange_interp(x, y, x_new):
             if i != j:
                 denom = x[i] - x[j]
                 if denom == 0:
-                    continue  # skip to avoid division by zero
+                    continue 
                 term *= (x_new - x[j]) / denom
         total += term
     return total
@@ -26,7 +26,7 @@ def interpolate_1d(data, scale):
         i = int(np.floor(xi))
         idxs = np.arange(i - 1, i + 3)
 
-        # Clamp to valid range and get unique points to avoid duplicates
+       
         idxs = np.clip(idxs, 0, n - 1)
         x_pts = np.unique(x_old[idxs])
         y_pts = data[np.searchsorted(x_old, x_pts)]
@@ -60,7 +60,6 @@ def upscale_image_lagrange(img, scale):
 
     return np.uint8(result)
 
-# --- MAIN PROGRAM ---
 
 # Load grayscale image
 img_path = 'letter_A.png'
@@ -74,11 +73,11 @@ scale_factor = 2
 # Apply Lagrange interpolation
 scaled_lagrange = upscale_image_lagrange(img, scale_factor)
 
-# OpenCV comparisons
+#Comparisons
 scaled_nearest = cv2.resize(img, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_NEAREST)
 scaled_linear = cv2.resize(img, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
 
-# Display Results
+# Displaying Results
 plt.figure(figsize=(15, 5))
 
 plt.subplot(1, 3, 1)
